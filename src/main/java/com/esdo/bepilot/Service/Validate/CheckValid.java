@@ -89,9 +89,9 @@ public class CheckValid {
 
         File avatar = new File(request.getAvatar().trim());
 
-        if (!avatar.exists()) {
-            throw new InvalidException("Invalid avatar");
-        }
+//         if (!avatar.exists()) {
+//             throw new InvalidException("Invalid avatar");
+//         }
 
         if (request.getName().trim().length() == 0) {
             throw new InvalidException("Name is required");
