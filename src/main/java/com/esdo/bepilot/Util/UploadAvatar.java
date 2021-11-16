@@ -12,8 +12,8 @@ import java.io.IOException;
 @Component
 public class UploadAvatar {
 
-//    private static String FILE_DIRECTORY = "src/main/java/com/esdo/bepilot/images/";
-    private static String FILE_DIRECTORY = "D:/images/";
+   private static String FILE_DIRECTORY = "src/main/java/com/esdo/bepilot/images/";
+//     private static String FILE_DIRECTORY = "D:/images/";
 
     public static void upload(String path, Employee employee) {
         File file = new File(path);
