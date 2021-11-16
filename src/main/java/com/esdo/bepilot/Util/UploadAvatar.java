@@ -46,7 +46,7 @@ public class UploadAvatar {
         try {
             image = ImageIO.read(file);
             if (image == null) {
-                throw new InvalidException("Invalid Avatar Ahihi");
+                throw new InvalidException("Invalid Avatar");
             }
             ImageIO.write(image, type, new File(pathSave));
             employee.setAvatar(pathSave);
