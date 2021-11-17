@@ -133,6 +133,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         Employee employee = employeeOptional.get();
 
+        Optional<Account> accountOptional = accountRepository.findById(employee.getAccount().getId());
+        if (accountOptional.isEmpty()) {
+            throw new InvalidException("Invalid account has id = " + employee.getAccount().getId());
+        }
+        Account account = accountOptional.get();
+
+        accountRepository.delete(account);
         employeeRepository.delete(employee);
     }
 }

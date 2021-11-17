@@ -3,6 +3,7 @@ package com.esdo.bepilot.Service.Validate;
 import com.esdo.bepilot.Exception.InvalidException;
 import com.esdo.bepilot.Model.Request.AuthRequest;
 import com.esdo.bepilot.Model.Request.EmployeeRequest;
+import com.esdo.bepilot.Model.Request.ForgotPasswordRequest;
 import com.esdo.bepilot.Repository.AccountRepository;
 import com.esdo.bepilot.Repository.EmployeeRepository;
 
@@ -87,11 +88,11 @@ public class CheckValid {
             throw new InvalidException("Avatar is required");
         }
 
-        File avatar = new File(request.getAvatar().trim());
-
-        if (!avatar.exists()) {
-            throw new InvalidException("Invalid avatar");
-        }
+//        File avatar = new File(request.getAvatar().trim());
+//
+//        if (!avatar.exists()) {
+//            throw new InvalidException("Invalid avatar");
+//        }
 
         if (request.getName().trim().length() == 0) {
             throw new InvalidException("Name is required");
@@ -148,6 +149,25 @@ public class CheckValid {
         if (!request.getRole().trim().equals("ADMIN")) {
             if (!request.getRole().trim().equals("EMPLOYEE")) {
                 throw new InvalidException("Role must be is ADMIN or EMPLOYEE");
+            }
+        }
+    }
+
+    public static void checkForgotPasswordRequest(ForgotPasswordRequest request, AccountRepository accountRepository) {
+        if (request.getEmail().trim().length() == 0) {
+            throw new InvalidException("Email is required");
+        }
+
+        if (!isEmail(request.getEmail().trim())) {
+            throw new InvalidException("Invalid Email");
+        }
+
+        List<String> emails = new ArrayList<>();
+        accountRepository.findAll().forEach(account -> emails.add(account.getEmail()));
+
+        for (String e : emails) {
+            if (e.equals(request.getEmail().trim())) {
+                throw new InvalidException("Email " + e + " đã tồn tại, vui lòng sử dụng email khác");
             }
         }
     }

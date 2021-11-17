@@ -2,6 +2,7 @@ package com.esdo.bepilot.Util;
 
 import com.esdo.bepilot.Exception.InvalidException;
 import com.esdo.bepilot.Model.Entity.Employee;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class UploadAvatar {
 
     private static String FILE_DIRECTORY = "src/main/java/com/esdo/bepilot/images/";
+//    private static String FILE_DIRECTORY = "D:/images/";
 
     public static void upload(String path, Employee employee) {
         File file = new File(path);
