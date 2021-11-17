@@ -16,7 +16,7 @@ public class ConvertObject {
 
     public static EmployeeResponse fromEmployeeToEmployeeResponse (Employee employee) {
         EmployeeResponse response = new EmployeeResponse();
-        response.setId("NV"+employee.getId());
+        response.setId(employee.getId());
         response.setAvatar(employee.getAvatar());
         response.setName(employee.getName());
         response.setPhone(employee.getPhone());
