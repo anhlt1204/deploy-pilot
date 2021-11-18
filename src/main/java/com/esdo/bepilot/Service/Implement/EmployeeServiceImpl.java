@@ -139,7 +139,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         Account account = accountOptional.get();
 
-        accountRepository.delete(account);
         employeeRepository.delete(employee);
+        account.setEmployee(null);
+        accountRepository.delete(account);
     }
 }

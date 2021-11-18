@@ -126,18 +126,33 @@ public class CheckValid {
             throw new InvalidException("Password must be eight characters including one letter, one number character");
         }
 
-        if (!isEdit) {
-            List<String> phones = new ArrayList<>();
-            employeeRepository.findAll().forEach(employee -> phones.add(employee.getPhone()));
+        List<String> phones = new ArrayList<>();
+        employeeRepository.findAll().forEach(employee -> phones.add(employee.getPhone()));
 
+        List<String> emails = new ArrayList<>();
+        accountRepository.findAll().forEach(account -> emails.add(account.getEmail()));
+
+        if (!isEdit) {
             for (String p : phones) {
                 if (p.equals(request.getPhone().trim())) {
                     throw new InvalidException("Số điện thoại " + p + " đã tồn tại, vui lòng sử dụng số điện thoại khác");
                 }
             }
 
-            List<String> emails = new ArrayList<>();
-            accountRepository.findAll().forEach(account -> emails.add(account.getEmail()));
+            for (String e : emails) {
+                if (e.equals(request.getEmail().trim())) {
+                    throw new InvalidException("Email " + e + " đã tồn tại, vui lòng sử dụng email khác");
+                }
+            }
+        } else {
+            phones.remove(request.getPhone());
+            emails.remove(request.getEmail());
+
+            for (String p : phones) {
+                if (p.equals(request.getPhone().trim())) {
+                    throw new InvalidException("Số điện thoại " + p + " đã tồn tại, vui lòng sử dụng số điện thoại khác");
+                }
+            }
 
             for (String e : emails) {
                 if (e.equals(request.getEmail().trim())) {

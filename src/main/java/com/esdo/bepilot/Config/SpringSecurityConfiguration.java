@@ -52,7 +52,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> corsConfiguration()).and().csrf().disable()
                 .authorizeRequests().antMatchers("/employees/**").hasRole("ADMIN")
-                .antMatchers("/login", "/register", "/swagger-ui.html", "/v2/api-docs").permitAll()
+                .antMatchers("/login", "/register", "/forgot", "/reset/**", "/swagger-ui.html", "/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
